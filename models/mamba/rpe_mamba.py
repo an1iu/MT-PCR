@@ -15,51 +15,18 @@ from models.transformer.output_layer import AttentionOutput
 
 from einops import rearrange, repeat
 from models.mamba.vanilla_mamba import Mamba
-from models.mamba.mamba2 import Mamba2
-
-from fla.models.linear_attn.configuration_linear_attn import LinearAttentionConfig
-from fla.models.linear_attn.modeling_linear_attn import LinearAttentionBlock
-from fla.layers.linear_attn import LinearAttention
-from fla.layers.delta_net import DeltaNet
-from fla.layers.gsa import GatedSlotAttention
-from fla.layers.simple_gla import SimpleGatedLinearAttention
-from fla.layers.based import BasedLinearAttention
-from fla.layers.rwkv6 import RWKV6Attention
-from fla.models.samba.modeling_samba import SambaBlock
-from fla.models.samba.configuration_samba import SambaConfig
-
-from models.metala.configuration_metala import MetaLAConfig
-from models.metala.modeling_metala import MetaLADecoderLayer,RPEMetaLADecoderLayer
 
 
 class RPEMamba(nn.Module):
     def __init__(self, d_model, dropout=None):
         super(RPEMamba, self).__init__()
         self.d_model = d_model
-        #self.mamba=RWKV6Attention()
-        #self.mamba =SimpleGatedLinearAttention()
-        #self.mamba=BasedLinearAttention(d_model)
         self.mamba = Mamba(d_model)
-        #self.mamba = Mamba2(d_model)
-        #self.mamba = Mamba2Model(Mamba2Config())
-        #self.mamba = MetaLADecoderLayer(MetaLAConfig(),0)
-        #self.mamba = RPEMetaLADecoderLayer(MetaLAConfig(),0)
-        #self.mamba = LinearAttentionBlock(LinearAttentionConfig(),0)
-        #self.mamba = RWKVBlock(RWKV6Config(),0)
-        #self.mamba = DeltaNetBlock(DeltaNetConfig(),0)
-        #self.mamba = RetNetBlock(RetNetConfig(),0)
-        #self.mamba = SambaBlock(SambaConfig(),0)
 
 
 
     def forward(self, input_states, position_states):
-        #print(input_states.size())
         hidden_states = self.mamba(input_states)
-        #print(position_states.size())
-        
-        #hidden_states = self.mamba(hidden_states=input_states)
-        #hidden_states = self.mamba(x=input_states,position_states=position_states)
-        
         return hidden_states, input_states
 
 

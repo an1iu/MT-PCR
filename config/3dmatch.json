@@ -3,7 +3,7 @@
     "log_steps": 200,
     "save_steps": 5000,
     "dataset": "3dmatch",
-    "runname": "cast",
+    "runname": "mtpcr",
     "log_dir": "./logs/3dmatch/",
     "snapshot_dir": "./ckpt/3dmatch/",
     "data_list": "./data/3dmatch_list/",

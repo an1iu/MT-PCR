@@ -3,7 +3,7 @@
     "log_steps": 200,
     "save_steps": 2000,
     "dataset": "nuscenes",
-    "runname": "cast",
+    "runname": "mtpcr",
     "log_dir": "./logs/nuscenes/",
     "snapshot_dir": "./ckpt/nuscenes/",
     "data_list": "./data/nuscenes_list/",

@@ -7,7 +7,7 @@ import torch.nn as nn
 from pytorch3d.ops import knn_points, knn_gather
 
 from models.kpconv import KPConvFPN, UnaryBlock
-from models.mtpcr.mtpcr import SpotGuidedGeoTransformer,SpotGuidedGeoMamba,SpotGuidedFlashGeoTransformer
+from models.mtpcr.mtpcr import SpotGuidedGeoTransformer,SpotGuidedGeoMamba
 from models.mtpcr.correspondence import KeypointMatching, FineMatching, CompatibilityGraphEmbedding
 from models.utils import grid_subsample_gpu, radius_search_gpu, apply_transform, weighted_svd
 from models.mtpcr.consistency import registration_ransac_based_on_correspondence

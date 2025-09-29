@@ -3,7 +3,7 @@
     "log_steps": 200,
     "save_steps": 0,
     "dataset": "eth",
-    "runname": "cast",
+    "runname": "mtpcr",
     "log_dir": "./logs/eth/",
     "snapshot_dir": "./ckpt/kitti/",
 

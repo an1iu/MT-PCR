@@ -3,7 +3,7 @@
     "log_steps": 200,
     "save_steps": 0,
     "dataset": "kitti",
-    "runname": "cast",
+    "runname": "mtpcr",
     "log_dir": "./logs/kitti/",
     "snapshot_dir": "./ckpt/kitti/",
     "data_list": "./data/kitti_list/",
