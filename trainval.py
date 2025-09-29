@@ -1,6 +1,6 @@
 import os
 os.environ['CUDA_DEVICE_ORDER']='PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES']='2'
+os.environ['CUDA_VISIBLE_DEVICES']='0'
 
 
 import torch
@@ -16,7 +16,7 @@ from data.kitti_data import KittiDataset
 from data.nuscenes_data import NuscenesDataset
 from data.indoor_data import IndoorDataset
 
-from models.models.cast import CAST
+from models.models.mtpcr import MTPCR
 from engine.evaluator import Evaluator
 from engine.trainer import EpochBasedTrainer
 from engine.losses import SpotMatchingLoss, CoarseMatchingLoss, KeypointMatchingLoss, ProbChamferLoss
@@ -92,7 +92,7 @@ class Trainer(EpochBasedTrainer):
         self.train_loader = DataLoader(train_dataset, 1, num_workers=cfg.data.num_workers, shuffle=True, pin_memory=True)
         self.val_loader = DataLoader(val_dataset, 1, num_workers=cfg.data.num_workers, shuffle=False, pin_memory=True)
         
-        self.model = CAST(cfg.model).cuda()
+        self.model = MTPCR(cfg.model).cuda()
         self.optimizer = optim.AdamW(self.model.parameters(), lr=cfg.optim.lr, weight_decay=cfg.optim.weight_decay)
         self.scheduler = StepLR(self.optimizer, step_size=cfg.optim.step_size, gamma=cfg.optim.gamma)
         self.loss_func = OverallLoss(cfg.loss).cuda()

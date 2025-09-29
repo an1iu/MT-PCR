@@ -1,5 +1,5 @@
 """
-CAST with minor adjustments in fine matching and pose estimation
+MT-PCR with minor adjustments in fine matching and pose estimation
 """
 
 import torch
@@ -8,15 +8,15 @@ import torch.nn.functional as F
 from pytorch3d.ops import knn_points, knn_gather
 
 from models.kpconv import KPConvFPN, UnaryBlock
-from models.cast.cast import SpotGuidedGeoTransformer, SpotGuidedGeoMamba
-from models.cast.correspondence import KeypointMatching, FineMatching, CompatibilityGraphEmbedding
+from models.mtpcr.mtpcr import SpotGuidedGeoTransformer, SpotGuidedGeoMamba
+from models.mtpcr.correspondence import KeypointMatching, FineMatching, CompatibilityGraphEmbedding
 from models.utils import grid_subsample_gpu, radius_search_gpu, apply_transform, weighted_svd
-from models.cast.consistency import registration_ransac_based_on_correspondence
+from models.mtpcr.consistency import registration_ransac_based_on_correspondence
 
 
-class CAST(nn.Module):
+class MTPCR(nn.Module):
     def __init__(self, cfg):
-        super(CAST, self).__init__()
+        super(MTPCR, self).__init__()
         self.kpconv_layers = cfg.kpconv_layers
         self.voxel_size = cfg.voxel_size
         self.init_radius = cfg.init_radius
@@ -34,7 +34,6 @@ class CAST(nn.Module):
             self.ransac_filter = cfg.ransac_filter
 
         self.backbone = KPConvFPN(cfg)
-        #self.transformer = SpotGuidedGeoTransformer(cfg)
         self.transformer = SpotGuidedGeoMamba(cfg)
         self.out_proj = nn.Linear(cfg.hidden_dim, cfg.output_dim)
         if cfg.use_overlap_head:

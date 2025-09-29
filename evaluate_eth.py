@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader
 from data.eth_data import ETHDataset
 from engine.trainer import EpochBasedTrainer
 
-from models.models.cast_eth import CAST
+from models.models.mtpcr_eth import MTPCR
 from engine.evaluator import Evaluator
 
 parser = argparse.ArgumentParser()
@@ -30,7 +30,7 @@ class Tester(EpochBasedTrainer):
         self.val_dataset = val_dataset
         
         cfg.model.filter = _args.filter
-        self.model = CAST(cfg.model).cuda()
+        self.model = MTPCR(cfg.model).cuda()
         self.evaluator = Evaluator(cfg.eval).cuda()
     
     def step(self, data_dict):
@@ -64,22 +64,6 @@ if __name__ == "__main__":
     RR = np.logical_and(RTE < 2.0, RRE < 5.0).astype(dtype=RTE.dtype)
     print("Threshold TE@2.0m,RE@5°", end=", ")
     print('RR: %.4f, RRE: %.4f, RTE: %.4f'%(RR.mean(), (RRE * RR).sum() / RR.sum(), (RTE * RR).sum() / RR.sum()))
-
-
-# RANSAC
-#Threshold TE@0.3m,RE@2°, RR: 0.9158, RRE: 0.5176, RTE: 0.0640
-#Threshold TE@0.3m,RE@5°, RR: 0.9705, RRE: 0.6422, RTE: 0.0699
-#Threshold TE@2.0m,RE@5°, RR: 0.9846, RRE: 0.6652, RTE: 0.0743
-# RANSAC + DSC
-#Threshold TE@0.3m,RE@2°, RR: 0.9285, RRE: 0.5409, RTE: 0.0626
-#Threshold TE@0.3m,RE@5°, RR: 0.9776, RRE: 0.6499, RTE: 0.0685
-#Threshold TE@2.0m,RE@5°, RR: 0.9832, RRE: 0.6593, RTE: 0.0704
-# RANSAC + SM
-#Threshold TE@0.3m,RE@2°, RR: 0.9467, RRE: 0.5428, RTE: 0.0630
-#Threshold TE@0.3m,RE@5°, RR: 0.9804, RRE: 0.6095, RTE: 0.0666
-#Threshold TE@2.0m,RE@5°, RR: 0.9874, RRE: 0.6279, RTE: 0.0690
-
-
 
 
 

@@ -12,7 +12,7 @@ from models.transformer.positional_encoding import GeometricStructureEmbedding
 from models.transformer.linear_transformer import LinearTransformerLayer
 
 from models.mamba.utils import serialization_func
-from models.cast.spot_attention import SparseTransformerLayer, Upsampling, Downsampling
+from models.mtpcr.spot_attention import SparseTransformerLayer, Upsampling, Downsampling
 
 
 class SpotGuidedTransformer(nn.Module):
