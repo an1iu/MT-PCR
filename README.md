@@ -38,8 +38,8 @@ cd MinkowskiEngine
 python setup.py install --blas_include_dirs=${CONDA_PREFIX}/include --blas=openblas
 
 # Install Mamba
-(pointmamba) $ pip install causal-conv1d>=1.2.0
-(pointmamba) $ cd mamba & pip install .
+pip install causal-conv1d>=1.2.0
+cd mamba & pip install .
 
 # Download pre-trained weights from release v1.0.0
 ```
