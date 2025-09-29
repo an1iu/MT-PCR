@@ -4,7 +4,7 @@ Official PyTorch implementation of the paper [''MT-PCR: A Hybrid Mamba-Transform
 
 ### 1. Introduction
 
-We propose MT-PCR, the first point cloud registration framework that integrates both Mamba and Transformer modules. Specifically, we serialize point cloud features using Z-order space-filling curves to enforce spatial locality, enabling Mamba to better model the geometric structure of the input. Additionally, we remove the order indicator module commonly used in Mamba-based sequence modeling, leads to improved performance in our setting. The serialized features are then processed by an optimized Mamba encoder, followed by a Transformer refinement stage. 
+We propose MT-PCR, the first point cloud registration framework that integrates both Mamba and Transformer modules. Specifically, we serialize point cloud features using Z-order space-filling curves to enforce spatial locality, enabling Mamba to better model the geometric structure of the input. Additionally, we remove the order indicator module commonly used in Mamba-based sequence modeling, leads to improved performance in our setting. The serialized features are then processed by an optimized Mamba encoder, followed by a Transformer refinement stage.  Extensive experiments on multiple benchmarks demonstrate that MT-PCR outperforms Transformer-based and concurrent state-of-the-art methods in both accuracy and efficiency, significantly reducing while GPU memory usage and FLOPs.
 
 ![](assets/mtpcr.png)
 
@@ -223,4 +223,8 @@ python finetune.py
 ```
 
 ## Acknowledgements
-We sincerely thank the area chair for the appreciations of our work, and we sincerely thank all of the reviewers for their constructive reviews and valuable suggestions. Meanwhile, we would like to thank the authors of [D3Feat](https://github.com/XuyangBai/D3Feat.pytorch), [PREDATOR](https://github.com/prs-eth/OverlapPredator), [GeoTransformer](https://github.com/qinzheng93/GeoTransformer), and [REGTR](https://github.com/yewzijian/RegTR) for making their source codes public.
+[D3Feat](https://github.com/XuyangBai/D3Feat.pytorch)  
+[PREDATOR](https://github.com/prs-eth/OverlapPredator)  
+[GeoTransformer](https://github.com/qinzheng93/GeoTransformer)  
+[CAST](https://github.com/RenlangHuang/CAST) 
+[PointMamba](https://github.com/LMD0311/PointMamba)
