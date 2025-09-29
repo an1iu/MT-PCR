@@ -8,7 +8,6 @@ We propose MT-PCR, the first point cloud registration framework that integrates 
 
 ![](assets/mtpcr.png)
 
-
 ### 2. Installation
 
 Please use the following command for installation.
@@ -38,95 +37,16 @@ git clone https://github.com/NVIDIA/MinkowskiEngine
 cd MinkowskiEngine
 python setup.py install --blas_include_dirs=${CONDA_PREFIX}/include --blas=openblas
 
+# Install Mamba
+(pointmamba) $ pip install causal-conv1d>=1.2.0
+(pointmamba) $ cd mamba & pip install .
+
 # Download pre-trained weights from release v1.0.0
 ```
 
 Code has been tested with Ubuntu 20.04, GCC 9.4.0, Python 3.7, PyTorch 1.9.0, CUDA 11.2 and PyTorch3D 0.6.2.
 
-
-
-### 3. KITTI odometry
-
-#### Data preparation
-
-Download the data from the [KITTI official website](http://www.cvlibs.net/datasets/kitti/eval_odometry.php). The data should be organized as follows:
-- `KITTI`
-    - `velodyne` (point clouds)
-        - `sequences`
-            - `00`
-                - `velodyne`
-                    - `000000.bin`
-                    - ...
-            - ...
-    - `results` (poses)
-        - `00.txt`
-        - ...
-    - `sequences` (sensor calibration and time stamps)
-        - `00`
-            - `calib.txt`
-            - `times.txt`
-        - ...
-
-Please note that we have already generated the information of pairwise point clouds via ``./data/gen_kitti_data.py``, which is stored in ``./data/kitti_list``. Feel free to use it directly or re-generate the information by yourselves.
-
-#### Training
-After modifying the ```data.root``` item to your dataset path in ```./config/kitti.json```, you can use the following command for training.
-```bash
-python trainval.py --mode train --config ./config/kitti.json
-```
-
-#### Testing
-After modifying the ```data.root``` item to your dataset path in ```./config/kitti.json```, you can use the following command for testing.
-```bash
-python trainval.py --mode test --config ./config/kitti.json --load_pretrained cast-epoch-39
-```
-
-#### Qualitative results
-You can use the following command for visualization:
-```bash
-# visualize the keypoints
-python demo_outdoor.py --dataset kitti --mode keypts --load_pretrained cast-epoch-39 --split train --id 0
-# visualize the keypoint correspondences
-python demo_outdoor.py --dataset kitti --mode corr --load_pretrained cast-epoch-39 --split train --id 0
-# visualize the aligned point clouds after pose estimation
-python demo_outdoor.py --dataset kitti --mode reg --load_pretrained cast-epoch-39 --split train --id 0
-```
-![](assets/kitti.png)
-
-
-### 4. nuScenes
-
-#### Data preparation
-
-Download the data from the [nuScenes official website](https://www.nuscenes.org/nuscenes#download). The data should be organized as follows:
-- `nuscenes`
-    - `samples`
-        - `LIDAR_TOP`
-            - `n008-2018-05-21-11-06-59-0400__LIDAR_TOP__1526915243047392.pcd.bin`
-            - ...
-
-#### Training
-After modifying the ```data.root``` item to your dataset path in ```./config/nuscenes.json```, you can use the following command for training.
-```bash
-python trainval.py --mode train --config ./config/nuscenes.json
-```
-
-#### Testing
-After modifying the ```data.root``` item to your dataset path in ```./config/nuscenes.json```, you can use the following command for testing.
-```bash
-python trainval.py --mode test --config ./config/nuscenes.json --load_pretrained cast-epoch-03-26000
-```
-
-#### Qualitative results
-```bash
-# visualize the keypoints
-python demo_outdoor.py --dataset nuscenes --mode keypts --load_pretrained cast-epoch-03-26000 --split train --id 0
-# visualize the keypoint correspondences
-python demo_outdoor.py --dataset nuscenes --mode corr --load_pretrained cast-epoch-03-26000 --split train --id 0
-# visualize the aligned point clouds after pose estimation
-python demo_outdoor.py --dataset nuscenes --mode reg --load_pretrained cast-epoch-03-26000 --split train --id 0
-```
-![](assets/nuscenes.png)
+![](assets/pipeline.png)
 
 
 ### 5. 3DMatch and 3DLoMatch
@@ -196,6 +116,86 @@ python demo_3dmatch.py --split test --benchmark 3DMatch --id 0
 ![](assets/3dmatch.png)
 
 
+### 4. KITTI odometry
+
+#### Data preparation
+
+Download the data from the [KITTI official website](http://www.cvlibs.net/datasets/kitti/eval_odometry.php). The data should be organized as follows:
+- `KITTI`
+    - `velodyne` (point clouds)
+        - `sequences`
+            - `00`
+                - `velodyne`
+                    - `000000.bin`
+                    - ...
+            - ...
+    - `results` (poses)
+        - `00.txt`
+        - ...
+    - `sequences` (sensor calibration and time stamps)
+        - `00`
+            - `calib.txt`
+            - `times.txt`
+        - ...
+
+Please note that we have already generated the information of pairwise point clouds via ``./data/gen_kitti_data.py``, which is stored in ``./data/kitti_list``. Feel free to use it directly or re-generate the information by yourselves.
+
+#### Training
+After modifying the ```data.root``` item to your dataset path in ```./config/kitti.json```, you can use the following command for training.
+```bash
+python trainval.py --mode train --config ./config/kitti.json
+```
+
+#### Testing
+After modifying the ```data.root``` item to your dataset path in ```./config/kitti.json```, you can use the following command for testing.
+```bash
+python trainval.py --mode test --config ./config/kitti.json --load_pretrained cast-epoch-39
+```
+
+#### Qualitative results
+You can use the following command for visualization:
+```bash
+# visualize the keypoints
+python demo_outdoor.py --dataset kitti --mode keypts --load_pretrained cast-epoch-39 --split train --id 0
+# visualize the keypoint correspondences
+python demo_outdoor.py --dataset kitti --mode corr --load_pretrained cast-epoch-39 --split train --id 0
+# visualize the aligned point clouds after pose estimation
+python demo_outdoor.py --dataset kitti --mode reg --load_pretrained cast-epoch-39 --split train --id 0
+```
+
+
+### 5. nuScenes
+
+#### Data preparation
+
+Download the data from the [nuScenes official website](https://www.nuscenes.org/nuscenes#download). The data should be organized as follows:
+- `nuscenes`
+    - `samples`
+        - `LIDAR_TOP`
+            - `n008-2018-05-21-11-06-59-0400__LIDAR_TOP__1526915243047392.pcd.bin`
+            - ...
+
+#### Training
+After modifying the ```data.root``` item to your dataset path in ```./config/nuscenes.json```, you can use the following command for training.
+```bash
+python trainval.py --mode train --config ./config/nuscenes.json
+```
+
+#### Testing
+After modifying the ```data.root``` item to your dataset path in ```./config/nuscenes.json```, you can use the following command for testing.
+```bash
+python trainval.py --mode test --config ./config/nuscenes.json --load_pretrained cast-epoch-03-26000
+```
+
+#### Qualitative results
+```bash
+# visualize the keypoints
+python demo_outdoor.py --dataset nuscenes --mode keypts --load_pretrained cast-epoch-03-26000 --split train --id 0
+# visualize the keypoint correspondences
+python demo_outdoor.py --dataset nuscenes --mode corr --load_pretrained cast-epoch-03-26000 --split train --id 0
+# visualize the aligned point clouds after pose estimation
+python demo_outdoor.py --dataset nuscenes --mode reg --load_pretrained cast-epoch-03-26000 --split train --id 0
+```
 
 ### 6. Generalization and Adaptation to ETH
 
