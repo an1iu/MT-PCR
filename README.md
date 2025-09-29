@@ -226,5 +226,5 @@ python finetune.py
 [D3Feat](https://github.com/XuyangBai/D3Feat.pytorch)  
 [PREDATOR](https://github.com/prs-eth/OverlapPredator)  
 [GeoTransformer](https://github.com/qinzheng93/GeoTransformer)  
-[CAST](https://github.com/RenlangHuang/CAST) 
+[CAST](https://github.com/RenlangHuang/CAST)  
 [PointMamba](https://github.com/LMD0311/PointMamba)
