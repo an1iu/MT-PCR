@@ -164,40 +164,7 @@ python demo_outdoor.py --dataset kitti --mode reg --load_pretrained cast-epoch-3
 ```
 
 
-### 5. nuScenes
-
-#### Data preparation
-
-Download the data from the [nuScenes official website](https://www.nuscenes.org/nuscenes#download). The data should be organized as follows:
-- `nuscenes`
-    - `samples`
-        - `LIDAR_TOP`
-            - `n008-2018-05-21-11-06-59-0400__LIDAR_TOP__1526915243047392.pcd.bin`
-            - ...
-
-#### Training
-After modifying the ```data.root``` item to your dataset path in ```./config/nuscenes.json```, you can use the following command for training.
-```bash
-python trainval.py --mode train --config ./config/nuscenes.json
-```
-
-#### Testing
-After modifying the ```data.root``` item to your dataset path in ```./config/nuscenes.json```, you can use the following command for testing.
-```bash
-python trainval.py --mode test --config ./config/nuscenes.json --load_pretrained cast-epoch-03-26000
-```
-
-#### Qualitative results
-```bash
-# visualize the keypoints
-python demo_outdoor.py --dataset nuscenes --mode keypts --load_pretrained cast-epoch-03-26000 --split train --id 0
-# visualize the keypoint correspondences
-python demo_outdoor.py --dataset nuscenes --mode corr --load_pretrained cast-epoch-03-26000 --split train --id 0
-# visualize the aligned point clouds after pose estimation
-python demo_outdoor.py --dataset nuscenes --mode reg --load_pretrained cast-epoch-03-26000 --split train --id 0
-```
-
-### 6. Generalization and Adaptation to ETH
+### 5. Generalization and Adaptation to ETH
 
 #### Data preparation
 
