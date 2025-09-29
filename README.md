@@ -49,7 +49,7 @@ Code has been tested with Ubuntu 20.04, GCC 9.4.0, Python 3.7, PyTorch 1.9.0, CU
 ![](assets/pipeline.png)
 
 
-### 5. 3DMatch and 3DLoMatch
+### 3. 3DMatch and 3DLoMatch
 
 #### Data preparation
 
