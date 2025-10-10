@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 from data.indoor_data import IndoorTestDataset
 from engine.trainer import EpochBasedTrainer
 
-from models.models.cast import CAST
+from models.models.mtpcr import MTPCR
 from engine.evaluator import Evaluator
 
 
@@ -30,7 +30,7 @@ class Tester(EpochBasedTrainer):
         self.val_loader = DataLoader(val_dataset, 1, num_workers=cfg.data.num_workers, shuffle=False, pin_memory=True)
         self.val_dataset = val_dataset
         
-        self.model = CAST(cfg.model).cuda()
+        self.model = MTPCR(cfg.model).cuda()
         self.evaluator = Evaluator(cfg.eval).cuda()
     
     def step(self, data_dict):

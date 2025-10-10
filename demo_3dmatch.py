@@ -7,7 +7,7 @@ import open3d as o3d
 from munch import munchify
 from engine.trainer import EpochBasedTrainer
 from data.indoor_data import IndoorDataset, IndoorTestDataset
-from models.models.cast import CAST
+from models.models.mtpcr import MTPCR
 
 
 parser = argparse.ArgumentParser()
@@ -26,7 +26,7 @@ class Engine(EpochBasedTrainer):
         self.val_dataset = IndoorDataset(cfg.data.root, 'val', cfg.data.npoints, cfg.data.voxel_size, cfg.data_list, 0.0)
         self.test_dataset = IndoorTestDataset(cfg.data.root, _args.benchmark, cfg.data.npoints, cfg.data.voxel_size, cfg.data_list)
         
-        self.model = CAST(cfg.model).cuda()
+        self.model = MTPCR(cfg.model).cuda()
 
 
 if __name__ == "__main__":

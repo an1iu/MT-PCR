@@ -18,7 +18,7 @@ from munch import munchify
 from data.kitti_data import KittiDataset
 from data.eth_data import ETHDataset
 
-from models.models.cast import CAST
+from models.models.mtpcr import MTPCR
 from engine.evaluator import Evaluator
 from engine.trainer import EpochBasedTrainer
 from engine.losses import SpotMatchingLoss, CoarseMatchingLoss, KeypointMatchingLoss, ProbChamferLoss
@@ -90,7 +90,7 @@ class Trainer(EpochBasedTrainer):
         self.val_loader = DataLoader(val_dataset, 1, num_workers=cfg.data.num_workers, shuffle=False, pin_memory=True)
         self.test_loader = DataLoader(test_dataset, 1, num_workers=cfg.data.num_workers, shuffle=False, pin_memory=True)
         
-        self.model = CAST(cfg.model).cuda()
+        self.model = MTPCR(cfg.model).cuda()
         self.optimizer = optim.AdamW(self.model.parameters(), lr=cfg.optim.lr, weight_decay=cfg.optim.weight_decay)
         self.scheduler = StepLR(self.optimizer, step_size=cfg.optim.step_size, gamma=cfg.optim.gamma)
         self.loss_func = OverallLoss(cfg.loss).cuda()

@@ -9,7 +9,7 @@ from data.kitti_data import KittiDataset
 from data.nuscenes_data import NuscenesDataset
 from engine.trainer import EpochBasedTrainer
 
-from models.models.cast import CAST
+from models.models.mtpcr import MTPCR
 
 
 parser = argparse.ArgumentParser()
@@ -34,7 +34,7 @@ class Engine(EpochBasedTrainer):
             self.val_dataset = NuscenesDataset(cfg.data.root, 'val', cfg.data.npoints, cfg.data.voxel_size, cfg.data_list)
             self.test_dataset = NuscenesDataset(cfg.data.root, 'test', cfg.data.npoints, cfg.data.voxel_size, cfg.data_list)
         
-        self.model = CAST(cfg.model).cuda()
+        self.model = MTPCR(cfg.model).cuda()
 
 def keypoints_to_spheres(keypoints, radius=0.03, color=[1.0, 0.25, 0.0]):
     spheres = o3d.geometry.TriangleMesh()
