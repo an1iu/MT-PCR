@@ -88,23 +88,23 @@ python trainval.py --mode train --config ./config/3dmatch.json
 #### Testing
 After modifying the ```data.root``` item to your dataset path in ```./config/3dmatch.json```, you can use the following command for testing.
 ```bash
-# evaluate the registration recall (CAST+RANSAC)
+# evaluate the registration recall (MTPCR+RANSAC)
 ## for 3DMatch benchmark
-python evaluate_RR.py --benchmark 3DMatch --config ./config/3dmatch.json --load_pretrained cast-epoch-05 --ransac
+python evaluate_RR.py --benchmark 3DMatch --config ./config/3dmatch.json --load_pretrained mtpcr-epoch-05 --ransac
 ## for 3DLoMatch benchmark
-python evaluate_RR.py --benchmark 3DLoMatch -config ./config/3dmatch.json --load_pretrained cast-epoch-05 --ransac
+python evaluate_RR.py --benchmark 3DLoMatch -config ./config/3dmatch.json --load_pretrained mtpcr-epoch-05 --ransac
 
-# evaluate the registration recall (CAST)
+# evaluate the registration recall (MTPCR)
 ## for 3DMatch benchmark
-python evaluate_RR.py --benchmark 3DMatch --config ./config/3dmatch.json --load_pretrained cast-epoch-05
+python evaluate_RR.py --benchmark 3DMatch --config ./config/3dmatch.json --load_pretrained mtpcr-epoch-05
 ## for 3DLoMatch benchmark
-python evaluate_RR.py --benchmark 3DLoMatch --config ./config/3dmatch.json --load_pretrained cast-epoch-05
+python evaluate_RR.py --benchmark 3DLoMatch --config ./config/3dmatch.json --load_pretrained mtpcr-epoch-05
 
 # evaluate IR, FMR, PIR, and PMR
 ## for 3DMatch benchmark
-python evaluate_IR_FMR.py --benchmark 3DMatch --config ./config/3dmatch.json --load_pretrained cast-epoch-05
+python evaluate_IR_FMR.py --benchmark 3DMatch --config ./config/3dmatch.json --load_pretrained mtpcr-epoch-05
 ## for 3DLoMatch benchmark
-python evaluate_IR_FMR.py --benchmark 3DLoMatch --config ./config/3dmatch.json --load_pretrained cast-epoch-05
+python evaluate_IR_FMR.py --benchmark 3DLoMatch --config ./config/3dmatch.json --load_pretrained mtpcr-epoch-05
 ```
 
 
@@ -149,18 +149,18 @@ python trainval.py --mode train --config ./config/kitti.json
 #### Testing
 After modifying the ```data.root``` item to your dataset path in ```./config/kitti.json```, you can use the following command for testing.
 ```bash
-python trainval.py --mode test --config ./config/kitti.json --load_pretrained cast-epoch-39
+python trainval.py --mode test --config ./config/kitti.json --load_pretrained mtpcr-epoch-39
 ```
 
 #### Qualitative results
 You can use the following command for visualization:
 ```bash
 # visualize the keypoints
-python demo_outdoor.py --dataset kitti --mode keypts --load_pretrained cast-epoch-39 --split train --id 0
+python demo_outdoor.py --dataset kitti --mode keypts --load_pretrained mtpcr-epoch-39 --split train --id 0
 # visualize the keypoint correspondences
-python demo_outdoor.py --dataset kitti --mode corr --load_pretrained cast-epoch-39 --split train --id 0
+python demo_outdoor.py --dataset kitti --mode corr --load_pretrained mtpcr-epoch-39 --split train --id 0
 # visualize the aligned point clouds after pose estimation
-python demo_outdoor.py --dataset kitti --mode reg --load_pretrained cast-epoch-39 --split train --id 0
+python demo_outdoor.py --dataset kitti --mode reg --load_pretrained mtpcr-epoch-39 --split train --id 0
 ```
 
 
