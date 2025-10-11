@@ -101,7 +101,7 @@ def xyz2key(
     return key
 
 
-def key2xyz(key: torch.Tensor, depth: int = 16):#depth: int = 16 消融实验
+def key2xyz(key: torch.Tensor, depth: int = 16):
     r"""Decodes the shuffled key to :attr:`x`, :attr:`y`, :attr:`z` coordinates
     and the batch index based on pre-computed look up tables.
 
